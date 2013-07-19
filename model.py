@@ -6,16 +6,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, backref
-
-# ENGINE = None
-# Session = None
-
-# def connect():
-#     global ENGINE 
-#     global Session
-
-#     return Session()
-
+import correlation 
 
 
 engine = create_engine("sqlite:///ratings.db", echo=False)
