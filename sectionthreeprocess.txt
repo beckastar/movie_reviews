@@ -1,0 +1,55 @@
+For any row in tables, 
+similarity can be determined by how close their ratings are to one another
+for the columns they have in common 
+we can determine closeness of two ratings by subtracting (delta) from each other
+if we take the deltas and square them
+we get pearson correlation
+
+
+num_critics = len(common_critics)
+num = product_sum -((film1_sum * film2_sum)/num_critics))
+den = sqrt ((film1_sum * film2_sum)/ num_critics)* film2_sum_square - pow(film1_sum, 2)/ num_critics))
+pearson = num/den
+
+
+
+
+-- imported correlation into model. now, correlation can serve as a module. 
+
+
+Here's the process for guessing:
+
+Given a user U who has not rated movie X, find all other users who have rated that movie.
+For each other user O, find the movies they have rated in common with user U.
+Pair up the common movies, then feed each pair list into the pearson function to find similarity S.
+Rank the users by their similarities, and find the user with the highest similarity, O'.
+Multiply the similarity coefficient of user O' with their rating for movie X. This is your predicted rating.
+
+
+m = session.query(Movies).filter(Movies.name.like("%Toy%")).one()
+
+See below for process:
+
+
+
+NameError: name 'name' is not defined
+>>> m = session.query(Movies).filter(Movies.name.like("%Toy%")).all()
+>>> m
+[<__main__.Movies object at 0x7f555e51c650>]
+>>> m.name
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'list' object has no attribute 'name'
+>>> m
+[<__main__.Movies object at 0x7f555e51c650>]
+>>> m[0].name
+u'Toy Story (1995)'
+>>> m = session.query(Movies).filter(Movies.name.like("%Toy%")).one()
+>>> m.name
+u'Toy Story (1995)'
+>>> m = session.query(Movies).filter(Movies.name.like("%Toy Story%")).one()
+>>> m.name
+u'Toy Story (1995)'
+>>> m = session.query(Movies).filter(Movies.name.like("%Flower%")).one()
+>>> m.name
+u'Flower of My Secret, The (Flor de mi secreto, La) (1995)'
